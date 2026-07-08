@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
 import { useState, useEffect } from 'react';
-import { ChevronDown } from 'lucide-react';
+import { ChevronDown, Sparkles } from 'lucide-react';
 
 const Hero = () => {
   const [displayedText, setDisplayedText] = useState('');
@@ -10,17 +10,15 @@ const Hero = () => {
 
   const roles = [
     'Computer Science Student',
-    'Software Developer',
-    'Python Programmer',
-    'C++ Developer',
-    'SQL Learner',
-    'Future AI Engineer',
-    'Tech Enthusiast',
+    'Full Stack Developer',
+    'Python Enthusiast',
+    'Problem Solver',
+    'Tech Innovator'
   ];
 
   useEffect(() => {
     const currentRole = roles[textIndex];
-    const speed = isDeleting ? 50 : 100;
+    const speed = isDeleting ? 40 : 80;
 
     const timer = setTimeout(() => {
       if (!isDeleting && charIndex < currentRole.length) {
@@ -44,94 +42,123 @@ const Hero = () => {
     document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' });
   };
 
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.2,
+        delayChildren: 0.2
+      }
+    }
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.8 } }
+  };
+
   return (
-    <div id="home" className="relative min-h-screen flex items-center justify-center pt-16 overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-to-b from-primary/5 to-transparent pointer-events-none" />
+    <section id="home" className="relative min-h-screen pt-20 pb-20 px-4 flex items-center justify-center overflow-hidden">
+      <motion.div
+        className="absolute top-20 right-10 w-72 h-72 bg-gradient-to-br from-accent/20 to-secondary/10 rounded-full blur-3xl"
+        animate={{ y: [0, 30, 0], x: [0, 20, 0] }}
+        transition={{ duration: 8, repeat: Infinity }}
+      />
 
-      <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-        {/* Left Content */}
+      <div className="relative z-10 max-w-5xl mx-auto w-full">
         <motion.div
-          initial={{ opacity: 0, x: -50 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.8 }}
-          className="text-center md:text-left"
+          variants={containerVariants}
+          initial="hidden"
+          animate="visible"
+          className="text-center space-y-8"
         >
-          <motion.p
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.2 }}
-            className="text-secondary font-poppins text-lg mb-4"
-          >
-            Hi 👋
-          </motion.p>
+          {/* Badge */}
+          <motion.div variants={itemVariants} className="flex justify-center">
+            <div className="badge flex items-center gap-2">
+              <Sparkles size={16} />
+              Welcome to my portfolio
+            </div>
+          </motion.div>
 
-          <motion.h1
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.3 }}
-            className="text-5xl md:text-7xl font-poppins font-bold mb-4 leading-tight"
-          >
-            I'm{' '}
-            <span className="gradient-text glow-text">Tayyaba Awan</span>
-          </motion.h1>
+          {/* Main Title */}
+          <motion.div variants={itemVariants}>
+            <h1 className="text-5xl sm:text-6xl md:text-7xl font-bold leading-tight mb-4">
+              Hi, I'm{' '}
+              <span className="text-gradient">Tayyaba Awan</span>
+            </h1>
+          </motion.div>
 
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.4 }}
-            className="h-20 mb-8"
-          >
-            <p className="text-xl md:text-2xl text-gray-300 font-inter">
+          {/* Typing Animation */}
+          <motion.div variants={itemVariants} className="min-h-20">
+            <p className="text-xl sm:text-2xl md:text-3xl text-gray-300 font-light">
               {displayedText}
-              <span className="animate-pulse">|</span>
+              <motion.span
+                animate={{ opacity: [1, 0] }}
+                transition={{ duration: 0.8, repeat: Infinity }}
+                className="text-secondary ml-1"
+              >
+                |
+              </motion.span>
             </p>
           </motion.div>
 
+          {/* Description */}
           <motion.p
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.5 }}
-            className="text-gray-400 text-lg mb-8 max-w-lg"
+            variants={itemVariants}
+            className="text-gray-400 text-lg max-w-2xl mx-auto leading-relaxed"
           >
-            Motivated CS student with 3.7 CGPA, passionate about building impactful software solutions and exploring AI, databases, and automation.
+            Passionate CS student with a 3.7 CGPA, specializing in full-stack development, algorithms, and building innovative solutions. Let's create something amazing together.
           </motion.p>
 
+          {/* CTA Buttons */}
           <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.6 }}
-            className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start"
+            variants={itemVariants}
+            className="flex flex-col sm:flex-row gap-4 justify-center items-center pt-4"
           >
-            <a
+            <motion.a
               href="#projects"
-              className="button-primary text-center"
+              whileHover={{ scale: 1.05, boxShadow: '0 0 30px rgba(108, 99, 255, 0.5)' }}
+              whileTap={{ scale: 0.95 }}
+              className="btn-primary flex items-center gap-2 group"
             >
-              View Projects
-            </a>
-            <a
-              href="mailto:tayyabaawan731@gmail.com"
-              className="button-secondary text-center"
+              Explore My Work
+              <motion.span
+                animate={{ x: [0, 5, 0] }}
+                transition={{ duration: 1, repeat: Infinity }}
+              >
+                →
+              </motion.span>
+            </motion.a>
+            <motion.a
+              href="#contact"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="btn-secondary"
             >
-              Contact Me
-            </a>
+              Get In Touch
+            </motion.a>
           </motion.div>
-        </motion.div>
 
-        {/* Right Illustration */}
-        <motion.div
-          initial={{ opacity: 0, x: 50 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.8 }}
-          className="hidden md:flex justify-center"
-        >
+          {/* Stats */}
           <motion.div
-            animate={{ y: [0, -20, 0] }}
-            transition={{ duration: 3, repeat: Infinity }}
-            className="relative w-64 h-64 glass-effect rounded-2xl flex items-center justify-center"
+            variants={itemVariants}
+            className="grid grid-cols-3 gap-6 pt-12 max-w-2xl mx-auto"
           >
-            <div className="text-6xl">💻</div>
-            <div className="absolute top-4 right-4 w-12 h-12 bg-primary/20 rounded-lg animate-bounce-slow" />
-            <div className="absolute bottom-4 left-4 w-16 h-16 bg-accent/20 rounded-full animate-pulse" />
+            {[
+              { label: 'Projects', value: '4+' },
+              { label: 'CGPA', value: '3.7' },
+              { label: 'Skills', value: '20+' }
+            ].map((stat, idx) => (
+              <motion.div
+                key={idx}
+                whileHover={{ y: -5 }}
+                className="glass-light p-4 rounded-xl text-center"
+              >
+                <p className="text-2xl font-bold text-gradient">{stat.value}</p>
+                <p className="text-sm text-gray-400">{stat.label}</p>
+              </motion.div>
+            ))}
           </motion.div>
         </motion.div>
       </div>
@@ -140,12 +167,12 @@ const Hero = () => {
       <motion.div
         animate={{ y: [0, 10, 0] }}
         transition={{ duration: 2, repeat: Infinity }}
-        className="absolute bottom-8 left-1/2 transform -translate-x-1/2 cursor-pointer"
+        className="absolute bottom-10 left-1/2 transform -translate-x-1/2 cursor-pointer z-20"
         onClick={scrollToSection}
       >
         <ChevronDown className="text-secondary" size={32} />
       </motion.div>
-    </div>
+    </section>
   );
 };
 
