@@ -1,32 +1,31 @@
-import AnimatedText from '../components/AnimatedText';
+import { motion } from 'framer-motion';
 import ProjectCard from '../components/ProjectCard';
 
 const Projects = () => {
   const projects = [
     {
       title: 'Weather Monitoring System',
-      description: 'Console-based C++ application for managing and monitoring weather data with prediction alerts and file handling capabilities.',
-      tech: ['C++', 'OOP', 'STL', 'File Handling'],
+      description: 'Advanced C++ console application featuring real-time weather data management, prediction alerts, and file I/O operations with comprehensive error handling.',
+      tech: ['C++', 'OOP', 'STL', 'File I/O'],
       github: 'https://github.com/tayyabaawan731-droid/Weather-Mointring-System',
-      live: null
+      featured: true
     },
     {
-      title: 'Online Food Ordering System',
-      description: 'Console-based ordering application built with OOP concepts, featuring a food menu, order management, and automatic bill calculation.',
+      title: 'Online Food Ordering Platform',
+      description: 'Full-featured ordering system built with OOP principles, featuring menu management, order processing, automatic billing, and customer database.',
       tech: ['C++', 'OOP', 'Data Structures'],
       github: 'https://github.com/tayyabaawan731-droid/Online-Food-Ordering-System',
-      live: null
+      featured: true
     },
     {
-      title: 'Ice Cream Ordering Management System',
-      description: 'Comprehensive database application built in Microsoft Access with customer management, order processing, and automatic PDF report generation.',
-      tech: ['Microsoft Access', 'SQL', 'Database Design'],
-      github: 'https://github.com/tayyabaawan731-droid/Ice-Cream-Ordering-System',
-      live: null
+      title: 'Ice Cream Management System',
+      description: 'Comprehensive database application with customer management, order tracking, inventory control, and automated PDF report generation.',
+      tech: ['MS Access', 'SQL', 'Database Design'],
+      github: 'https://github.com/tayyabaawan731-droid/Ice-Cream-Ordering-System'
     },
     {
-      title: 'Blood Donation Website',
-      description: 'Responsive website connecting blood donors with recipients, featuring donor registration and search functionality with a clean, user-friendly interface.',
+      title: 'Blood Donation Portal',
+      description: 'Responsive website connecting donors with recipients. Features donor registration, search functionality, and user-friendly interface.',
       tech: ['HTML', 'CSS', 'Responsive Design'],
       github: 'https://github.com/tayyabaawan731-droid/blood-donation-website',
       live: 'https://tayyabaawan731-droid.github.io/blood-donation-website'
@@ -34,18 +33,30 @@ const Projects = () => {
   ];
 
   return (
-    <section id="projects" className="relative py-20 px-4 sm:px-6 lg:px-8">
+    <section id="projects" className="relative py-24 px-4">
       <div className="max-w-6xl mx-auto">
-        <AnimatedText className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-poppins font-bold gradient-text mb-4">
-            Projects
+        {/* Header */}
+        <motion.div
+          initial={{ opacity: 0, y: -20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="text-center mb-16"
+        >
+          <h2 className="text-4xl md:text-5xl font-bold mb-4">
+            <span className="text-gradient">Featured Projects</span>
           </h2>
-          <p className="text-gray-400 text-lg">Showcasing my work and expertise</p>
-        </AnimatedText>
+          <p className="text-gray-400 text-lg">Showcasing my best work and expertise</p>
+        </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        {/* Projects Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {projects.map((project, index) => (
-            <ProjectCard key={project.title} project={project} index={index} />
+            <ProjectCard
+              key={project.title}
+              project={project}
+              index={index}
+              featured={project.featured}
+            />
           ))}
         </div>
       </div>
