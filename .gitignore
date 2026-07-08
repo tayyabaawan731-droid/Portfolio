@@ -1,0 +1,13 @@
+.gitignore
+node_modules/
+build/
+.env
+.env.local
+.DS_Store
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.yarn/cache
+.yarn/unplugged
