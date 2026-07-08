@@ -6,7 +6,7 @@ const AnimatedText = ({ children, className = '', delay = 0 }) => {
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
-      transition={{ duration: 0.6, delay }}
+      transition={{ duration: 0.8, delay }}
       className={className}
     >
       {children}
